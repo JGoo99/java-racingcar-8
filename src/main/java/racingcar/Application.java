@@ -14,14 +14,17 @@ public class Application {
             String[] carNames = input.split(",", -1);
             int[] values = new int[carNames.length];
             if (Arrays.stream(carNames).anyMatch(x -> x.trim().isBlank())) {
-                throw new IllegalArgumentException("자동차 이름은 1자 이상이어야 합니다.");
+                throw new IllegalArgumentException("자동차 이름은 1자 이상 이어야 합니다.");
             }
             if (Arrays.stream(carNames).anyMatch(x -> x.length() > 5)) {
-                throw new IllegalArgumentException("자동차 이름은 5자 이하이어야 합니다.");
+                throw new IllegalArgumentException("자동차 이름은 5자 이하 이어야 합니다.");
             }
 
             System.out.println("시도할 횟수는 몇 회인가요?");
             int x = Integer.parseInt(Console.readLine());
+            if (x <= 0) {
+                throw new IllegalArgumentException("시도할 횟수는 0회 이상 이어야 합니다.");
+            }
 
             StringBuilder logStr = new StringBuilder();
             logStr.append("\n실행 결과");
