@@ -13,6 +13,9 @@ public class Application {
             String input = Console.readLine();
             String[] carNames = input.split(",", -1);
             int[] values = new int[carNames.length];
+            if (Arrays.stream(carNames).anyMatch(x -> x.trim().isBlank())) {
+                throw new IllegalArgumentException("자동차 이름은 1자 이상이어야 합니다.");
+            }
             if (Arrays.stream(carNames).anyMatch(x -> x.length() > 5)) {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하이어야 합니다.");
             }

@@ -106,6 +106,60 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 자동차_이름이_1자_미만인_경우_예외를_던진다1() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi,", "1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름이_1자_미만인_경우_예외를_던진다2() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(",pobi", "1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름이_공백인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(" ,pobi", "1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름이_백스페이스인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("\b,pobi", "3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름_문자열이_공백인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("", "3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름_문자열이_화이트스페이스인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException(" ", "3"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
