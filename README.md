@@ -32,25 +32,25 @@
 
 # 세부 기능 리스트
 ## 입력 파싱
-- [ ] : 쉼표(,)를 기준으로 자동차 이름 리스트를 받는다.
-- [ ] : 자동차 이동 횟수를 받는다.
+- [x] : 쉼표(,)를 기준으로 자동차 이름 리스트를 받는다.
+- [x] : 자동차 이동 횟수를 받는다.
 
 ## 입력 검증
-- [ ] : camp.nextstep.edu.missionutils.Console의 readLine() 활용
+- [x] : camp.nextstep.edu.missionutils.Console의 readLine() 활용
 - [ ] : 자동차 이름이 쉼표(,)를 기준으로 들어왔는지 
 - [ ] : 자동차 이름이 5자 이하인지
 
 ## 계산
-- [ ] : camp.nextstep.edu.missionutils.Randoms의 pickNumberInRange()를 활용
-- [ ] : 0에서 9 사이에서 무작위 값을 구한 후 무작위 값이 4 이상일 경우 전진한다.
-- [ ] : 4 미만일 경우 스킵(정지)한다.
+- [x] : camp.nextstep.edu.missionutils.Randoms의 pickNumberInRange()를 활용
+- [x] : 0에서 9 사이에서 무작위 값을 구한 후 무작위 값이 4 이상일 경우 전진한다.
+- [x] : 4 미만일 경우 스킵(정지)한다.
 - [ ] : 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료
 
 ## 출력
-- [ ] : 자동차 경주 게임을 완료한 후 누가 우승했는지 출력한다.
+- [x] : 자동차 경주 게임을 완료한 후 누가 우승했는지 출력한다.
 - [ ] : 우승자가 아예 없는 경우 -> 
-- [ ] : 우승자가 1명인 경우 -> 최종 우승자 : pobi
-- [ ] : 우승자가 2명 이상인 경우 -> 최종 우승자 : pobi, jun
+- [x] : 우승자가 1명인 경우 -> 최종 우승자 : pobi
+- [x] : 우승자가 2명 이상인 경우 -> 최종 우승자 : pobi, jun
 
 
 # 예외
