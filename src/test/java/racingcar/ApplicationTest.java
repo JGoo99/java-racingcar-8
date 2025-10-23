@@ -102,7 +102,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi,javaji", "1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 5자 이하 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 5자 이하이어야 합니다.")
         );
     }
 
@@ -111,7 +111,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi,", "1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
@@ -120,7 +120,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(",pobi", "1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
@@ -129,7 +129,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(" ,pobi", "1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
@@ -138,7 +138,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("\b,pobi", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
@@ -147,7 +147,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
@@ -156,16 +156,43 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(" ", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상 이어야 합니다.")
+                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
         );
     }
 
     @Test
-    void 시도_횟수가_0_이하인_경우_예외를_던진다() {
+    void 시도할_횟수가_0인_경우_예외를_던진다() {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi", "0"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도할 횟수는 0회 이상 이어야 합니다.")
+                .hasMessageContaining("시도할 횟수는 1회 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 시도할_횟수가_음수인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi", "-1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("시도할 횟수는 1회 이상이어야 합니다.")
+        );
+    }
+
+    @Test
+    void 시도할_횟수가_숫자가_아닌_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi", "s"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("시도할 횟수 입력값이 유효하지 않습니다.")
+        );
+    }
+
+    @Test
+    void 시도할_횟수가_숫자가_공백인_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi", "s"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("시도할 횟수 입력값이 유효하지 않습니다.")
         );
     }
 

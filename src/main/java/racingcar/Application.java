@@ -13,22 +13,32 @@ public class Application {
             String input = Console.readLine();
             String[] carNames = input.split(",", -1);
             int[] values = new int[carNames.length];
+            // TODO: input null 체크
             if (Arrays.stream(carNames).anyMatch(x -> x.trim().isBlank())) {
-                throw new IllegalArgumentException("자동차 이름은 1자 이상 이어야 합니다.");
+                throw new IllegalArgumentException("자동차 이름은 1자 이상이어야 합니다.");
             }
             if (Arrays.stream(carNames).anyMatch(x -> x.length() > 5)) {
-                throw new IllegalArgumentException("자동차 이름은 5자 이하 이어야 합니다.");
+                throw new IllegalArgumentException("자동차 이름은 5자 이하이어야 합니다.");
             }
 
             System.out.println("시도할 횟수는 몇 회인가요?");
-            int x = Integer.parseInt(Console.readLine());
-            if (x <= 0) {
-                throw new IllegalArgumentException("시도할 횟수는 0회 이상 이어야 합니다.");
+            int attempts;
+            try {
+                String rawAttempts = Console.readLine();
+                if (rawAttempts == null) {
+                    throw new IllegalArgumentException("시도할 횟수 입력값이 비어 있습니다.");
+                }
+                attempts = Integer.parseInt(rawAttempts.trim());
+                if (attempts <= 0) {
+                    throw new IllegalArgumentException("시도할 횟수는 1회 이상이어야 합니다.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("시도할 횟수 입력값이 유효하지 않습니다. (숫자만 입력)");
             }
 
             StringBuilder logStr = new StringBuilder();
             logStr.append("\n실행 결과");
-            for (int i = 0; i < x; i++) {
+            for (int i = 0; i < attempts; i++) {
                 logStr.append("\n");
                 for (int j = 0; j < carNames.length; j++) {
                     int random = Randoms.pickNumberInRange(0, 9);
