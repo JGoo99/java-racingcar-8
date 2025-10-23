@@ -38,7 +38,7 @@
 ## 입력 검증
 - [x] : camp.nextstep.edu.missionutils.Console의 readLine() 활용
 - [ ] : 자동차 이름이 쉼표(,)를 기준으로 들어왔는지 
-- [ ] : 자동차 이름이 5자 이하인지
+- [x] : 자동차 이름이 5자를 초과하는 경우 예외를 던진다.
 
 ## 계산
 - [x] : camp.nextstep.edu.missionutils.Randoms의 pickNumberInRange()를 활용
