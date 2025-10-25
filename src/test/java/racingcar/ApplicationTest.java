@@ -147,7 +147,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름을 입력해야 합니다.")
+                .hasMessageContaining("입력값이 비어있습니다.")
         );
     }
 
@@ -156,7 +156,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(" ", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름을 입력해야 합니다.")
+                .hasMessageContaining("입력값이 비어있습니다.")
         );
     }
 
