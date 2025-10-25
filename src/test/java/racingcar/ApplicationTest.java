@@ -147,7 +147,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+                .hasMessageContaining("자동차 이름을 입력해야 합니다.")
         );
     }
 
@@ -156,7 +156,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException(" ", "3"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름은 1자 이상이어야 합니다.")
+                .hasMessageContaining("자동차 이름을 입력해야 합니다.")
         );
     }
 
@@ -193,6 +193,15 @@ class ApplicationTest extends NsTest {
             assertThatThrownBy(() -> runException("pobi", "s"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("시도할 횟수 입력값이 유효하지 않습니다.")
+        );
+    }
+
+    @Test
+    void 자동차_이름이_중복된_경우_예외를_던진다() {
+        assertSimpleTest(() ->
+            assertThatThrownBy(() -> runException("pobi,pobi", "1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("자동차 이름은 중복될 수 없습니다.")
         );
     }
 
