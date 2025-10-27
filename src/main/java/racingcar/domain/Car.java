@@ -17,14 +17,18 @@ public class Car {
     }
 
     public Car(String name) {
+        validate(name);
+        this.name = name;
+        this.position = 0;
+    }
+
+    private static void validate(String name) {
         if (name.isEmpty()) {
             throw new IllegalArgumentException("자동차 이름은 1자 이상이어야 합니다.");
         }
         if (name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException("자동차 이름은 5자 이하이어야 합니다.");
         }
-        this.name = name;
-        this.position = 0;
     }
 
     public void move() {
