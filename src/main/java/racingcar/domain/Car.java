@@ -15,8 +15,8 @@ public class Car {
         return name;
     }
 
-    public int getPosition() {
-        return position;
+    public boolean isAheadOf(Car other) {
+        return this.position > other.position;
     }
 
     public void moveIf(MovePolicy movePolicy) {
@@ -27,6 +27,10 @@ public class Car {
 
     public String formatRoundResult() {
         return this.name + " : " + "-".repeat(this.position);
+    }
+
+    public boolean isSamePosition(Car other) {
+        return this.position == other.position;
     }
 
     @Override
@@ -47,9 +51,5 @@ public class Car {
 
     public Car copy() {
         return new Car(name, position);
-    }
-
-    public boolean isAtPosition(int max) {
-        return this.position == max;
     }
 }
