@@ -4,6 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
     public String readTrimmedLine() {
-        return Console.readLine().trim();
+        String input = Console.readLine();
+        if (input == null) {
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
+        return input.trim();
     }
 }
