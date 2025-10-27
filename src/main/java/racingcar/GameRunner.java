@@ -1,7 +1,6 @@
 package racingcar;
 
 import java.util.List;
-import racingcar.domain.CarMovePolicy;
 import racingcar.domain.RaceResult;
 import racingcar.input.AttemptParser;
 import racingcar.input.CarNameParser;
@@ -10,22 +9,37 @@ import racingcar.output.OutputView;
 import racingcar.service.RaceGame;
 
 public class GameRunner {
-    private final InputView in = new InputView();
-    private final OutputView out = new OutputView();
-    private final CarNameParser carNameParser = new CarNameParser();
-    private final AttemptParser attemptParser = new AttemptParser();
-    private final RaceGame game = new RaceGame(new CarMovePolicy());
+    private final InputView in;
+    private final OutputView out;
+    private final CarNameParser carNameParser;
+    private final AttemptParser attemptParser;
+    private final RaceGame game;
+
+    public GameRunner(InputView in, OutputView out, CarNameParser carNameParser,
+                      AttemptParser attemptParser, RaceGame game) {
+        this.in = in;
+        this.out = out;
+        this.carNameParser = carNameParser;
+        this.attemptParser = attemptParser;
+        this.game = game;
+    }
 
     public void run() {
-        out.askCarNames();
-        String rawNames = in.readTrimmedLine();
-        final List<String> carNames = carNameParser.parse(rawNames);
-
-        out.askAttempts();
-        String rawAttempts = in.readTrimmedLine();
-        final int attempts = attemptParser.parse(rawAttempts);
-
+        final List<String> carNames = getCarNames();
+        final int attempts = getAttempts();
         RaceResult result = game.run(carNames, attempts);
         result.printWith(out);
+    }
+
+    private int getAttempts() {
+        out.askAttempts();
+        String rawAttempts = in.readTrimmedLine();
+        return attemptParser.parse(rawAttempts);
+    }
+
+    private List<String> getCarNames() {
+        out.askCarNames();
+        String rawNames = in.readTrimmedLine();
+        return carNameParser.parse(rawNames);
     }
 }
