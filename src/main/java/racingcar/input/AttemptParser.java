@@ -18,5 +18,8 @@ public class AttemptParser {
         if (rawAttempts == null || rawAttempts.trim().isEmpty()) {
             throw new IllegalArgumentException("시도할 횟수 입력값이 비어 있습니다.");
         }
+        if (!rawAttempts.matches("^[0-9]+$")) {
+            throw new IllegalArgumentException("시도 횟수는 자연수만 입력하세요.");
+        }
     }
 }

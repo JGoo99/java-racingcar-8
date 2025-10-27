@@ -174,7 +174,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi", "-1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도할 횟수는 1회 이상이어야 합니다.")
+                .hasMessageContaining("시도 횟수는 자연수만 입력하세요.")
         );
     }
 
@@ -183,16 +183,16 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() ->
             assertThatThrownBy(() -> runException("pobi", "s"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도할 횟수 입력값이 유효하지 않습니다.")
+                .hasMessageContaining("시도 횟수는 자연수만 입력하세요.")
         );
     }
 
     @Test
     void 시도할_횟수가_숫자가_공백인_경우_예외를_던진다() {
         assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("pobi", "s"))
+            assertThatThrownBy(() -> runException("pobi", "\n"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("시도할 횟수 입력값이 유효하지 않습니다.")
+                .hasMessageContaining("입력값이 비어있습니다.")
         );
     }
 
