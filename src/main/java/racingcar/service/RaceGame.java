@@ -19,18 +19,14 @@ public class RaceGame {
         List<List<Car>> rounds = new ArrayList<>();
 
         for (int i = 0; i < attempts; i++) {
-            for (Car car : cars) {
-                car.moveIf(movePolicy);
-            }
+            cars.forEach(car -> car.moveIf(movePolicy));
             rounds.add(copyCars(cars));
         }
         return new RaceResult(rounds);
     }
 
     private List<Car> copyCars(List<Car> cars) {
-        return cars.stream()
-            .map(Car::copy)
-            .toList();
+        return cars.stream().map(Car::copy).toList();
     }
 
     private static List<Car> initGameBoard(List<String> carNames) {

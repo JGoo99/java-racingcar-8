@@ -6,12 +6,16 @@ public class AttemptParser {
     private static final Pattern NATURAL_NUMBER = Pattern.compile("^[0-9]+$");
 
     public int parse(String rawAttempts) {
-        requireNotBlank(rawAttempts);
-        ensureNaturalNumberForm(rawAttempts);
-        ensureNoLeadingZeros(rawAttempts);
+        validate(rawAttempts);
         int attempts = parseAttempts(rawAttempts);
         ensurePositive(attempts);
         return attempts;
+    }
+
+    private void validate(String rawAttempts) {
+        requireNotBlank(rawAttempts);
+        ensureNaturalNumberForm(rawAttempts);
+        ensureNoLeadingZeros(rawAttempts);
     }
 
     private static void requireNotBlank(String raw) {
