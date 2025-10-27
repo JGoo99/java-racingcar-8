@@ -1,8 +1,8 @@
 package racingcar.output;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import racingcar.domain.Car;
 
 public class OutputView {
     public void askCarNames() {
@@ -13,21 +13,18 @@ public class OutputView {
         System.out.println("시도할 횟수는 몇 회인가요?");
     }
 
-    public void printRounds(List<Map<String, Integer>> rounds) {
-        StringBuilder roundResult = new StringBuilder();
-        roundResult.append("\n실행 결과");
-        for (Map<String, Integer> board : rounds) {
-            for (Entry<String, Integer> cur : board.entrySet()) {
-                roundResult.append(cur.getKey())
-                    .append(" : ")
-                    .append("-".repeat(cur.getValue()))
-                    .append("\n");
-            }
-        }
-        System.out.println(roundResult);
+    public void printRounds(List<List<Car>> snapshots) {
+        System.out.println("\n실행 결과");
+        snapshots.forEach(this::printRound);
     }
 
-    public void printWinner(List<String> winners) {
-        System.out.println("\n최종 우승자 : " + String.join(", ", winners));
+    private void printRound(List<Car> cars) {
+        cars.forEach(car -> System.out.println(car.formatRoundResult()));
+        System.out.println();
+    }
+
+    public void printWinner(List<Car> winners) {
+        String joined = winners.stream().map(Car::getName).collect(Collectors.joining(", "));
+        System.out.println("최종 우승자 : " + joined);
     }
 }

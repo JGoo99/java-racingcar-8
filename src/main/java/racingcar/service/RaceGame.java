@@ -1,9 +1,7 @@
 package racingcar.service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import racingcar.domain.Car;
 import racingcar.domain.MovePolicy;
@@ -18,35 +16,25 @@ public class RaceGame {
 
     public RaceResult run(List<String> carNames, int attempts) {
         List<Car> cars = initGameBoard(carNames);
-        List<Map<String, Integer>> rounds = new ArrayList<>();
+        List<List<Car>> rounds = new ArrayList<>();
 
         for (int i = 0; i < attempts; i++) {
             for (Car car : cars) {
-                if (shouldMove()) {
-                    car.move();
-                }
-                rounds.add(parseSnapshot(cars));
+                car.moveIf(movePolicy);
             }
+            rounds.add(copyCars(cars));
         }
-        return new RaceResult(rounds, parseSnapshot(cars));
+        return new RaceResult(rounds);
     }
 
-    private Map<String, Integer> parseSnapshot(List<Car> cars) {
-        Map<String, Integer> snapShot = new LinkedHashMap<>();
-        for (Car car : cars) {
-            snapShot.put(car.getName(), car.getPosition());
-        }
-        return snapShot;
+    private List<Car> copyCars(List<Car> cars) {
+        return cars.stream()
+            .map(Car::copy)
+            .toList();
     }
 
     private static List<Car> initGameBoard(List<String> carNames) {
-        if (carNames.size() != carNames.stream().distinct().count()) {
-            throw new IllegalArgumentException("자동차 이름은 중복될 수 없습니다.");
-        }
-        return carNames.stream().map(Car::new).collect(Collectors.toList());
-    }
-
-    private boolean shouldMove() {
-        return this.movePolicy.canMove();
+        return carNames.stream()
+            .map(name -> new Car(name, 0)).collect(Collectors.toList());
     }
 }

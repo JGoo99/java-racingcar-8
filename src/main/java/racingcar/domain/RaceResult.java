@@ -1,33 +1,31 @@
 package racingcar.domain;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import racingcar.output.OutputView;
 
 public class RaceResult {
-    private final List<Map<String, Integer>> rounds;
-    private final Map<String, Integer> finalBoard;
+    private final List<List<Car>> rounds;
+    private final List<Car> finalRound;
 
-    public RaceResult(List<Map<String, Integer>> rounds, Map<String, Integer> finalBoard) {
+    public RaceResult(List<List<Car>> rounds) {
         this.rounds = rounds;
-        this.finalBoard = finalBoard;
+        this.finalRound = rounds.getLast();
     }
 
-    public List<Map<String, Integer>> getRounds() {
-        return rounds;
-    }
-
-    public List<String> getWinners() {
+    private List<Car> getWinners() {
         int max = getMaxDistance();
-        return finalBoard.entrySet().stream()
-            .filter(e -> e.getValue() == max)
-            .map(Entry::getKey)
+        return finalRound.stream()
+            .filter(car -> car.isAtPosition(max))
             .collect(Collectors.toList());
     }
 
-    private Integer getMaxDistance() {
-        return Collections.max(finalBoard.values());
+    private int getMaxDistance() {
+        return finalRound.stream().mapToInt(Car::getPosition).max().getAsInt();
+    }
+
+    public void printWith(OutputView out) {
+        out.printRounds(this.rounds);
+        out.printWinner(this.getWinners());
     }
 }
