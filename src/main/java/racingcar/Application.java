@@ -5,6 +5,7 @@ import racingcar.input.AttemptParser;
 import racingcar.input.CarNameParser;
 import racingcar.input.InputView;
 import racingcar.output.OutputView;
+import racingcar.service.GameRunner;
 import racingcar.service.RaceGame;
 
 public class Application {

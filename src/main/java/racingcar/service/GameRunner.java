@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.service;
 
 import java.util.List;
 import racingcar.domain.RaceResult;
@@ -6,7 +6,6 @@ import racingcar.input.AttemptParser;
 import racingcar.input.CarNameParser;
 import racingcar.input.InputView;
 import racingcar.output.OutputView;
-import racingcar.service.RaceGame;
 
 public class GameRunner {
     private final InputView in;
