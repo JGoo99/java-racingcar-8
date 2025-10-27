@@ -20,10 +20,14 @@ public class RaceResult {
     }
 
     public List<String> getWinners() {
-        int max = Collections.max(finalBoard.values());
+        int max = getMaxDistance();
         return finalBoard.entrySet().stream()
             .filter(e -> e.getValue() == max)
             .map(Entry::getKey)
             .collect(Collectors.toList());
+    }
+
+    private Integer getMaxDistance() {
+        return Collections.max(finalBoard.values());
     }
 }

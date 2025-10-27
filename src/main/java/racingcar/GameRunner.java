@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+import racingcar.domain.CarMovePolicy;
 import racingcar.domain.RaceResult;
 import racingcar.input.AttemptParser;
 import racingcar.input.AttemptsValidator;
@@ -25,7 +26,7 @@ public class GameRunner {
     private final AttemptParser attemptParser = new AttemptParser();
     private final CarNameValidator carNameValidator = new CarNameValidator();
     private final AttemptsValidator attemptsValidator = new AttemptsValidator();
-    private final RaceGame game = new RaceGame();
+    private final RaceGame game = new RaceGame(new CarMovePolicy());
 
     public void run() {
         out.askCarNames();
